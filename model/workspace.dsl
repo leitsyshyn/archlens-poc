@@ -8,7 +8,7 @@ workspace "ShopFlow" "Synthetic e-commerce platform. Demo model for the ArchLens
 
         shop = softwareSystem "ShopFlow" "Online shop platform." {
             webApp = container "Web Application" "Storefront for browsers." "React" "Browser"
-            mobileApp = container "Mobile App" "Storefront for phones. Runs on customer devices, so it is not part of any server deployment." "Kotlin / Android" "Mobile"
+            mobileApp = container "Mobile Storefront" "Storefront for phones. Runs on customer devices, so it is not part of any server deployment." "Kotlin Multiplatform" "Mobile"
             apiGateway = container "API Gateway" "Single entry point for all clients." "Node.js / Express"
             catalogService = container "Catalog Service" "Product data and search." "Go"
             orderService = container "Order Service" "Order lifecycle." "Java / Spring Boot" {
@@ -34,6 +34,7 @@ workspace "ShopFlow" "Synthetic e-commerce platform. Demo model for the ArchLens
             catalogDb = container "Catalog Database" "Products." "MongoDB" "Database"
             orderDb = container "Order Database" "Orders." "PostgreSQL" "Database"
             paymentDb = container "Payment Database" "Payments." "PostgreSQL" "Database"
+            cache = container "Session Cache" "Caches sessions and rate-limit counters." "Redis" "Cache"
             messageBus = container "Message Bus" "Asynchronous domain events." "RabbitMQ" "Queue"
         }
 
@@ -42,8 +43,8 @@ workspace "ShopFlow" "Synthetic e-commerce platform. Demo model for the ArchLens
         customer -> mobileApp "Browses and orders using"
         webApp -> apiGateway "Calls" "HTTPS/JSON"
         mobileApp -> apiGateway "Calls" "HTTPS/JSON"
-        notificationService -> mobileApp "Sends push notifications to" "FCM"
         apiGateway -> orderService "Routes order requests to" "gRPC"
+        apiGateway -> cache "Caches sessions in" "RESP"
         orderService -> paymentService "Requests payment from" "gRPC"
         apiGateway -> catalogService "Routes catalog requests to" "gRPC"
         apiGateway -> paymentService "Routes payment requests to" "gRPC"
@@ -145,6 +146,9 @@ workspace "ShopFlow" "Synthetic e-commerce platform. Demo model for the ArchLens
                         productionNotificationService = containerInstance notificationService
                     }
                 }
+                productionCacheNode = deploymentNode "Cache Node" "" "AWS ElastiCache" "" 2 {
+                    productionCache = containerInstance cache
+                }
                 productionDataStores = deploymentNode "Production Data Stores" "" "Managed services" {
                     productionAtlas = deploymentNode "Atlas" "" "MongoDB Atlas" "" 3 {
                         productionCatalogDb = containerInstance catalogDb
@@ -191,7 +195,6 @@ workspace "ShopFlow" "Synthetic e-commerce platform. Demo model for the ArchLens
             paymentService -> psp "Authorises and captures payment"
             orderService -> messageBus "Publishes OrderPlaced"
             messageBus -> notificationService "Delivers OrderPlaced"
-            notificationService -> mobileApp "Pushes order confirmation"
             autoLayout
         }
 

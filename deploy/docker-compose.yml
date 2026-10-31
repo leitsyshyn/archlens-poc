@@ -29,5 +29,3 @@ services:
     image: rabbitmq:3-management
   cache:
     image: redis:7
-  worker:
-    image: shopflow/worker:1.0.0

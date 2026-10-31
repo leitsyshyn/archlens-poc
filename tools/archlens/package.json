@@ -1,0 +1,15 @@
+{
+  "name": "archlens",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "ArchLens POC: semantic diff of Structurizr workspaces with stable-layout rendering",
+  "bin": { "archlens": "./src/cli.ts" },
+  "scripts": {
+    "test": "node --test test/*.test.ts",
+    "archlens": "node src/cli.ts"
+  },
+  "dependencies": {
+    "yaml": "2.8.1"
+  }
+}

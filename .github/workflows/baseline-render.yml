@@ -1,0 +1,48 @@
+name: baseline-render
+# B2: the plain "re-render every diagram before and after" job.
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: poc-artifacts
+  cancel-in-progress: false
+
+jobs:
+  render:
+    runs-on: ubuntu-24.04
+    env:
+      GH_TOKEN: ${{ github.token }}
+      ARTIFACTS_REMOTE: https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git
+      REPO: ${{ github.repository }}
+      PR: ${{ github.event.pull_request.number }}
+      BASE_SHA: ${{ github.event.pull_request.base.sha }}
+      HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+      - name: Check out base revision next to head
+        run: git worktree add "$RUNNER_TEMP/base" "$BASE_SHA"
+      - name: Render base and head
+        run: |
+          tools/render-baseline/render.sh "$RUNNER_TEMP/base/model" "$RUNNER_TEMP/b2/base"
+          tools/render-baseline/render.sh model "$RUNNER_TEMP/b2/head"
+      - name: Publish images to poc-artifacts
+        run: tools/publish-artifacts.sh "$RUNNER_TEMP/b2" "b2/$HEAD_SHA" "B2 baseline renders for $HEAD_SHA"
+      - name: Post or update the comment
+        run: |
+          RAW="https://raw.githubusercontent.com/$REPO/poc-artifacts/b2/$HEAD_SHA"
+          tools/render-baseline/comment.sh "$RUNNER_TEMP/b2/base" "$RUNNER_TEMP/b2/head" "$RAW/base" "$RAW/head" "$BASE_SHA" "$HEAD_SHA" > "$RUNNER_TEMP/b2-comment.md"
+          MARKER="<!-- archlens-baseline-render-comment -->"
+          ID=$(gh api "repos/$REPO/issues/$PR/comments" --paginate --jq ".[] | select(.body | contains(\"$MARKER\")) | .id" | head -n1)
+          if [ -n "$ID" ]; then
+            gh api -X PATCH "repos/$REPO/issues/comments/$ID" -F body=@"$RUNNER_TEMP/b2-comment.md" --jq .html_url
+          else
+            gh api -X POST "repos/$REPO/issues/$PR/comments" -F body=@"$RUNNER_TEMP/b2-comment.md" --jq .html_url
+          fi

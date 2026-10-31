@@ -1,0 +1,33 @@
+# Deployment manifest checked by ArchLens rule R1.
+# Service name == DSL identifier of the container in model/workspace.dsl.
+services:
+  webApp:
+    image: nginx:1.27-alpine
+    ports: ["8080:80"]
+  apiGateway:
+    image: shopflow/api-gateway:1.0.0
+    depends_on: [catalogService, orderService, paymentService]
+  catalogService:
+    image: shopflow/catalog-service:1.0.0
+    depends_on: [catalogDb]
+  orderService:
+    image: shopflow/order-service:1.0.0
+    depends_on: [orderDb, messageBus]
+  paymentService:
+    image: shopflow/payment-service:1.0.0
+    depends_on: [paymentDb, messageBus]
+  notificationService:
+    image: shopflow/notification-service:1.0.0
+    depends_on: [messageBus]
+  catalogDb:
+    image: mongo:7
+  orderDb:
+    image: postgres:16
+  paymentDb:
+    image: postgres:16
+  messageBus:
+    image: rabbitmq:3-management
+  cache:
+    image: redis:7
+  worker:
+    image: shopflow/worker:1.0.0

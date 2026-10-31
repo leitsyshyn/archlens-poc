@@ -1,0 +1,2063 @@
+{
+  "configuration" : { },
+  "description" : "Synthetic e-commerce platform. Demo model for the ArchLens proof of concept.",
+  "documentation" : { },
+  "id" : 0,
+  "model" : {
+    "deploymentNodes" : [ {
+      "children" : [ {
+        "children" : [ {
+          "containerInstances" : [ {
+            "containerId" : "5",
+            "environment" : "Staging",
+            "id" : "81",
+            "instanceId" : 1,
+            "properties" : {
+              "structurizr.dsl.identifier" : "stagingWebApp"
+            },
+            "relationships" : [ {
+              "description" : "Calls",
+              "destinationId" : "83",
+              "id" : "84",
+              "linkedRelationshipId" : "34",
+              "sourceId" : "81",
+              "technology" : "HTTPS/JSON"
+            } ],
+            "tags" : "Container Instance"
+          } ],
+          "environment" : "Staging",
+          "id" : "80",
+          "instances" : "1",
+          "name" : "Web Pod",
+          "properties" : {
+            "structurizr.dsl.identifier" : "stagingWebPod"
+          },
+          "tags" : "Element,Deployment Node,",
+          "technology" : "nginx"
+        }, {
+          "containerInstances" : [ {
+            "containerId" : "7",
+            "environment" : "Staging",
+            "id" : "83",
+            "instanceId" : 1,
+            "properties" : {
+              "structurizr.dsl.identifier" : "stagingApiGateway"
+            },
+            "relationships" : [ {
+              "description" : "Routes catalog requests to",
+              "destinationId" : "86",
+              "id" : "87",
+              "linkedRelationshipId" : "39",
+              "sourceId" : "83",
+              "technology" : "gRPC"
+            }, {
+              "description" : "Routes order requests to",
+              "destinationId" : "89",
+              "id" : "90",
+              "linkedRelationshipId" : "36",
+              "sourceId" : "83",
+              "technology" : "gRPC"
+            }, {
+              "description" : "Routes payment requests to",
+              "destinationId" : "93",
+              "id" : "94",
+              "linkedRelationshipId" : "40",
+              "sourceId" : "83",
+              "technology" : "gRPC"
+            } ],
+            "tags" : "Container Instance"
+          } ],
+          "environment" : "Staging",
+          "id" : "82",
+          "instances" : "1",
+          "name" : "Gateway Pod",
+          "properties" : {
+            "structurizr.dsl.identifier" : "stagingGatewayPod"
+          },
+          "tags" : "Element,Deployment Node,",
+          "technology" : "Docker"
+        }, {
+          "containerInstances" : [ {
+            "containerId" : "8",
+            "environment" : "Staging",
+            "id" : "86",
+            "instanceId" : 1,
+            "properties" : {
+              "structurizr.dsl.identifier" : "stagingCatalogService"
+            },
+            "relationships" : [ {
+              "description" : "Reads and writes",
+              "destinationId" : "100",
+              "id" : "101",
+              "linkedRelationshipId" : "41",
+              "sourceId" : "86",
+              "technology" : "MongoDB wire"
+            } ],
+            "tags" : "Container Instance"
+          } ],
+          "environment" : "Staging",
+          "id" : "85",
+          "instances" : "1",
+          "name" : "Catalog Pod",
+          "properties" : {
+            "structurizr.dsl.identifier" : "stagingCatalogPod"
+          },
+          "tags" : "Element,Deployment Node,",
+          "technology" : "Docker"
+        }, {
+          "containerInstances" : [ {
+            "containerId" : "9",
+            "environment" : "Staging",
+            "id" : "89",
+            "instanceId" : 1,
+            "properties" : {
+              "structurizr.dsl.identifier" : "stagingOrderService"
+            },
+            "relationships" : [ {
+              "description" : "Fetches prices from",
+              "destinationId" : "86",
+              "id" : "91",
+              "linkedRelationshipId" : "43",
+              "sourceId" : "89",
+              "technology" : "gRPC"
+            }, {
+              "description" : "Requests payment from",
+              "destinationId" : "93",
+              "id" : "95",
+              "linkedRelationshipId" : "38",
+              "sourceId" : "89",
+              "technology" : "gRPC"
+            }, {
+              "description" : "Reads and writes",
+              "destinationId" : "103",
+              "id" : "104",
+              "linkedRelationshipId" : "42",
+              "sourceId" : "89",
+              "technology" : "JDBC"
+            }, {
+              "description" : "Publishes order events to",
+              "destinationId" : "108",
+              "id" : "109",
+              "linkedRelationshipId" : "44",
+              "sourceId" : "89",
+              "technology" : "AMQP"
+            } ],
+            "tags" : "Container Instance"
+          } ],
+          "environment" : "Staging",
+          "id" : "88",
+          "instances" : "1",
+          "name" : "Order Pod",
+          "properties" : {
+            "structurizr.dsl.identifier" : "stagingOrderPod"
+          },
+          "tags" : "Element,Deployment Node,",
+          "technology" : "Docker"
+        }, {
+          "containerInstances" : [ {
+            "containerId" : "15",
+            "environment" : "Staging",
+            "id" : "93",
+            "instanceId" : 1,
+            "properties" : {
+              "structurizr.dsl.identifier" : "stagingPaymentService"
+            },
+            "relationships" : [ {
+              "description" : "Reads and writes",
+              "destinationId" : "105",
+              "id" : "106",
+              "linkedRelationshipId" : "45",
+              "sourceId" : "93",
+              "technology" : "JDBC"
+            }, {
+              "description" : "Publishes payment events to",
+              "destinationId" : "108",
+              "id" : "111",
+              "linkedRelationshipId" : "48",
+              "sourceId" : "93",
+              "technology" : "AMQP"
+            } ],
+            "tags" : "Container Instance"
+          } ],
+          "environment" : "Staging",
+          "id" : "92",
+          "instances" : "1",
+          "name" : "Payment Pod",
+          "properties" : {
+            "structurizr.dsl.identifier" : "stagingPaymentPod"
+          },
+          "tags" : "Element,Deployment Node,",
+          "technology" : "Docker"
+        }, {
+          "containerInstances" : [ {
+            "containerId" : "22",
+            "environment" : "Staging",
+            "id" : "97",
+            "instanceId" : 1,
+            "properties" : {
+              "structurizr.dsl.identifier" : "stagingNotificationService"
+            },
+            "relationships" : [ {
+              "description" : "Consumes events from",
+              "destinationId" : "108",
+              "id" : "113",
+              "linkedRelationshipId" : "49",
+              "sourceId" : "97",
+              "technology" : "AMQP"
+            } ],
+            "tags" : "Container Instance"
+          } ],
+          "environment" : "Staging",
+          "id" : "96",
+          "instances" : "1",
+          "name" : "Notification Pod",
+          "properties" : {
+            "structurizr.dsl.identifier" : "stagingNotificationPod"
+          },
+          "tags" : "Element,Deployment Node,",
+          "technology" : "Docker"
+        } ],
+        "environment" : "Staging",
+        "id" : "79",
+        "instances" : "1",
+        "name" : "Staging Cluster",
+        "properties" : {
+          "structurizr.dsl.identifier" : "stagingCluster"
+        },
+        "tags" : "Element,Deployment Node",
+        "technology" : "Kubernetes"
+      }, {
+        "children" : [ {
+          "containerInstances" : [ {
+            "containerId" : "26",
+            "environment" : "Staging",
+            "id" : "100",
+            "instanceId" : 1,
+            "properties" : {
+              "structurizr.dsl.identifier" : "stagingCatalogDb"
+            },
+            "tags" : "Container Instance"
+          } ],
+          "environment" : "Staging",
+          "id" : "99",
+          "instances" : "1",
+          "name" : "Mongo",
+          "properties" : {
+            "structurizr.dsl.identifier" : "stagingMongo"
+          },
+          "tags" : "Element,Deployment Node,",
+          "technology" : "MongoDB 7"
+        }, {
+          "containerInstances" : [ {
+            "containerId" : "27",
+            "environment" : "Staging",
+            "id" : "103",
+            "instanceId" : 1,
+            "properties" : {
+              "structurizr.dsl.identifier" : "stagingOrderDb"
+            },
+            "tags" : "Container Instance"
+          }, {
+            "containerId" : "28",
+            "environment" : "Staging",
+            "id" : "105",
+            "instanceId" : 1,
+            "properties" : {
+              "structurizr.dsl.identifier" : "stagingPaymentDb"
+            },
+            "tags" : "Container Instance"
+          } ],
+          "environment" : "Staging",
+          "id" : "102",
+          "instances" : "1",
+          "name" : "Postgres",
+          "properties" : {
+            "structurizr.dsl.identifier" : "stagingPostgres"
+          },
+          "tags" : "Element,Deployment Node,",
+          "technology" : "PostgreSQL 16"
+        }, {
+          "containerInstances" : [ {
+            "containerId" : "30",
+            "environment" : "Staging",
+            "id" : "108",
+            "instanceId" : 1,
+            "properties" : {
+              "structurizr.dsl.identifier" : "stagingMessageBus"
+            },
+            "relationships" : [ {
+              "description" : "Delivers order events to",
+              "destinationId" : "93",
+              "id" : "110",
+              "linkedRelationshipId" : "70",
+              "sourceId" : "108",
+              "technology" : "AMQP"
+            }, {
+              "description" : "Delivers events to",
+              "destinationId" : "97",
+              "id" : "112",
+              "linkedRelationshipId" : "73",
+              "sourceId" : "108",
+              "technology" : "AMQP"
+            } ],
+            "tags" : "Container Instance"
+          } ],
+          "environment" : "Staging",
+          "id" : "107",
+          "instances" : "1",
+          "name" : "Broker",
+          "properties" : {
+            "structurizr.dsl.identifier" : "stagingBroker"
+          },
+          "tags" : "Element,Deployment Node,",
+          "technology" : "RabbitMQ 3"
+        } ],
+        "environment" : "Staging",
+        "id" : "98",
+        "instances" : "1",
+        "name" : "Staging Data Stores",
+        "properties" : {
+          "structurizr.dsl.identifier" : "stagingDataStores"
+        },
+        "tags" : "Element,Deployment Node",
+        "technology" : "Docker Compose"
+      } ],
+      "environment" : "Staging",
+      "id" : "77",
+      "infrastructureNodes" : [ {
+        "description" : "Routes HTTPS traffic.",
+        "environment" : "Staging",
+        "id" : "78",
+        "name" : "Load Balancer",
+        "properties" : {
+          "structurizr.dsl.identifier" : "stagingLoadBalancer"
+        },
+        "tags" : "Element,Infrastructure Node",
+        "technology" : "AWS ALB"
+      } ],
+      "instances" : "1",
+      "name" : "Staging Region",
+      "properties" : {
+        "structurizr.dsl.identifier" : "stagingRegion"
+      },
+      "tags" : "Element,Deployment Node",
+      "technology" : "AWS eu-west-1"
+    }, {
+      "children" : [ {
+        "children" : [ {
+          "containerInstances" : [ {
+            "containerId" : "5",
+            "environment" : "Production",
+            "id" : "119",
+            "instanceId" : 1,
+            "properties" : {
+              "structurizr.dsl.identifier" : "productionWebApp"
+            },
+            "relationships" : [ {
+              "description" : "Calls",
+              "destinationId" : "121",
+              "id" : "122",
+              "linkedRelationshipId" : "34",
+              "sourceId" : "119",
+              "technology" : "HTTPS/JSON"
+            } ],
+            "tags" : "Container Instance"
+          } ],
+          "environment" : "Production",
+          "id" : "118",
+          "instances" : "3",
+          "name" : "Web Pod",
+          "properties" : {
+            "structurizr.dsl.identifier" : "productionWebPod"
+          },
+          "tags" : "Element,Deployment Node,",
+          "technology" : "nginx"
+        }, {
+          "containerInstances" : [ {
+            "containerId" : "7",
+            "environment" : "Production",
+            "id" : "121",
+            "instanceId" : 1,
+            "properties" : {
+              "structurizr.dsl.identifier" : "productionApiGateway"
+            },
+            "relationships" : [ {
+              "description" : "Routes catalog requests to",
+              "destinationId" : "124",
+              "id" : "125",
+              "linkedRelationshipId" : "39",
+              "sourceId" : "121",
+              "technology" : "gRPC"
+            }, {
+              "description" : "Routes order requests to",
+              "destinationId" : "127",
+              "id" : "128",
+              "linkedRelationshipId" : "36",
+              "sourceId" : "121",
+              "technology" : "gRPC"
+            }, {
+              "description" : "Routes payment requests to",
+              "destinationId" : "131",
+              "id" : "132",
+              "linkedRelationshipId" : "40",
+              "sourceId" : "121",
+              "technology" : "gRPC"
+            }, {
+              "description" : "Caches sessions in",
+              "destinationId" : "137",
+              "id" : "138",
+              "linkedRelationshipId" : "37",
+              "sourceId" : "121",
+              "technology" : "RESP"
+            } ],
+            "tags" : "Container Instance"
+          } ],
+          "environment" : "Production",
+          "id" : "120",
+          "instances" : "4",
+          "name" : "Gateway Pod",
+          "properties" : {
+            "structurizr.dsl.identifier" : "productionGatewayPod"
+          },
+          "tags" : "Element,Deployment Node,",
+          "technology" : "Docker"
+        }, {
+          "containerInstances" : [ {
+            "containerId" : "8",
+            "environment" : "Production",
+            "id" : "124",
+            "instanceId" : 1,
+            "properties" : {
+              "structurizr.dsl.identifier" : "productionCatalogService"
+            },
+            "relationships" : [ {
+              "description" : "Reads and writes",
+              "destinationId" : "141",
+              "id" : "142",
+              "linkedRelationshipId" : "41",
+              "sourceId" : "124",
+              "technology" : "MongoDB wire"
+            } ],
+            "tags" : "Container Instance"
+          } ],
+          "environment" : "Production",
+          "id" : "123",
+          "instances" : "3",
+          "name" : "Catalog Pod",
+          "properties" : {
+            "structurizr.dsl.identifier" : "productionCatalogPod"
+          },
+          "tags" : "Element,Deployment Node,",
+          "technology" : "Docker"
+        }, {
+          "containerInstances" : [ {
+            "containerId" : "9",
+            "environment" : "Production",
+            "id" : "127",
+            "instanceId" : 1,
+            "properties" : {
+              "structurizr.dsl.identifier" : "productionOrderService"
+            },
+            "relationships" : [ {
+              "description" : "Fetches prices from",
+              "destinationId" : "124",
+              "id" : "129",
+              "linkedRelationshipId" : "43",
+              "sourceId" : "127",
+              "technology" : "gRPC"
+            }, {
+              "description" : "Requests payment from",
+              "destinationId" : "131",
+              "id" : "133",
+              "linkedRelationshipId" : "38",
+              "sourceId" : "127",
+              "technology" : "gRPC"
+            }, {
+              "description" : "Reads and writes",
+              "destinationId" : "144",
+              "id" : "145",
+              "linkedRelationshipId" : "42",
+              "sourceId" : "127",
+              "technology" : "JDBC"
+            }, {
+              "description" : "Publishes order events to",
+              "destinationId" : "149",
+              "id" : "150",
+              "linkedRelationshipId" : "44",
+              "sourceId" : "127",
+              "technology" : "AMQP"
+            } ],
+            "tags" : "Container Instance"
+          } ],
+          "environment" : "Production",
+          "id" : "126",
+          "instances" : "3",
+          "name" : "Order Pod",
+          "properties" : {
+            "structurizr.dsl.identifier" : "productionOrderPod"
+          },
+          "tags" : "Element,Deployment Node,",
+          "technology" : "Docker"
+        }, {
+          "containerInstances" : [ {
+            "containerId" : "15",
+            "environment" : "Production",
+            "id" : "131",
+            "instanceId" : 1,
+            "properties" : {
+              "structurizr.dsl.identifier" : "productionPaymentService"
+            },
+            "relationships" : [ {
+              "description" : "Reads and writes",
+              "destinationId" : "146",
+              "id" : "147",
+              "linkedRelationshipId" : "45",
+              "sourceId" : "131",
+              "technology" : "JDBC"
+            }, {
+              "description" : "Publishes payment events to",
+              "destinationId" : "149",
+              "id" : "152",
+              "linkedRelationshipId" : "48",
+              "sourceId" : "131",
+              "technology" : "AMQP"
+            } ],
+            "tags" : "Container Instance"
+          } ],
+          "environment" : "Production",
+          "id" : "130",
+          "instances" : "3",
+          "name" : "Payment Pod",
+          "properties" : {
+            "structurizr.dsl.identifier" : "productionPaymentPod"
+          },
+          "tags" : "Element,Deployment Node,",
+          "technology" : "Docker"
+        }, {
+          "containerInstances" : [ {
+            "containerId" : "22",
+            "environment" : "Production",
+            "id" : "135",
+            "instanceId" : 1,
+            "properties" : {
+              "structurizr.dsl.identifier" : "productionNotificationService"
+            },
+            "relationships" : [ {
+              "description" : "Consumes events from",
+              "destinationId" : "149",
+              "id" : "154",
+              "linkedRelationshipId" : "49",
+              "sourceId" : "135",
+              "technology" : "AMQP"
+            } ],
+            "tags" : "Container Instance"
+          } ],
+          "environment" : "Production",
+          "id" : "134",
+          "instances" : "2",
+          "name" : "Notification Pod",
+          "properties" : {
+            "structurizr.dsl.identifier" : "productionNotificationPod"
+          },
+          "tags" : "Element,Deployment Node,",
+          "technology" : "Docker"
+        } ],
+        "environment" : "Production",
+        "id" : "117",
+        "instances" : "1",
+        "name" : "Production Cluster",
+        "properties" : {
+          "structurizr.dsl.identifier" : "productionCluster"
+        },
+        "tags" : "Element,Deployment Node",
+        "technology" : "Kubernetes"
+      }, {
+        "containerInstances" : [ {
+          "containerId" : "29",
+          "environment" : "Production",
+          "id" : "137",
+          "instanceId" : 1,
+          "properties" : {
+            "structurizr.dsl.identifier" : "productionCache"
+          },
+          "tags" : "Container Instance"
+        } ],
+        "environment" : "Production",
+        "id" : "136",
+        "instances" : "2",
+        "name" : "Cache Node",
+        "properties" : {
+          "structurizr.dsl.identifier" : "productionCacheNode"
+        },
+        "tags" : "Element,Deployment Node,",
+        "technology" : "AWS ElastiCache"
+      }, {
+        "children" : [ {
+          "containerInstances" : [ {
+            "containerId" : "26",
+            "environment" : "Production",
+            "id" : "141",
+            "instanceId" : 1,
+            "properties" : {
+              "structurizr.dsl.identifier" : "productionCatalogDb"
+            },
+            "tags" : "Container Instance"
+          } ],
+          "environment" : "Production",
+          "id" : "140",
+          "instances" : "3",
+          "name" : "Atlas",
+          "properties" : {
+            "structurizr.dsl.identifier" : "productionAtlas"
+          },
+          "tags" : "Element,Deployment Node,",
+          "technology" : "MongoDB Atlas"
+        }, {
+          "containerInstances" : [ {
+            "containerId" : "27",
+            "environment" : "Production",
+            "id" : "144",
+            "instanceId" : 1,
+            "properties" : {
+              "structurizr.dsl.identifier" : "productionOrderDb"
+            },
+            "tags" : "Container Instance"
+          }, {
+            "containerId" : "28",
+            "environment" : "Production",
+            "id" : "146",
+            "instanceId" : 1,
+            "properties" : {
+              "structurizr.dsl.identifier" : "productionPaymentDb"
+            },
+            "tags" : "Container Instance"
+          } ],
+          "environment" : "Production",
+          "id" : "143",
+          "instances" : "2",
+          "name" : "RDS",
+          "properties" : {
+            "structurizr.dsl.identifier" : "productionRds"
+          },
+          "tags" : "Element,Deployment Node,",
+          "technology" : "Amazon RDS PostgreSQL"
+        }, {
+          "containerInstances" : [ {
+            "containerId" : "30",
+            "environment" : "Production",
+            "id" : "149",
+            "instanceId" : 1,
+            "properties" : {
+              "structurizr.dsl.identifier" : "productionMessageBus"
+            },
+            "relationships" : [ {
+              "description" : "Delivers order events to",
+              "destinationId" : "131",
+              "id" : "151",
+              "linkedRelationshipId" : "70",
+              "sourceId" : "149",
+              "technology" : "AMQP"
+            }, {
+              "description" : "Delivers events to",
+              "destinationId" : "135",
+              "id" : "153",
+              "linkedRelationshipId" : "73",
+              "sourceId" : "149",
+              "technology" : "AMQP"
+            } ],
+            "tags" : "Container Instance"
+          } ],
+          "environment" : "Production",
+          "id" : "148",
+          "instances" : "2",
+          "name" : "Amazon MQ",
+          "properties" : {
+            "structurizr.dsl.identifier" : "productionAmazonMq"
+          },
+          "tags" : "Element,Deployment Node,",
+          "technology" : "RabbitMQ"
+        } ],
+        "environment" : "Production",
+        "id" : "139",
+        "instances" : "1",
+        "name" : "Production Data Stores",
+        "properties" : {
+          "structurizr.dsl.identifier" : "productionDataStores"
+        },
+        "tags" : "Element,Deployment Node",
+        "technology" : "Managed services"
+      } ],
+      "environment" : "Production",
+      "id" : "114",
+      "infrastructureNodes" : [ {
+        "description" : "Routes HTTPS traffic.",
+        "environment" : "Production",
+        "id" : "115",
+        "name" : "Load Balancer",
+        "properties" : {
+          "structurizr.dsl.identifier" : "productionLoadBalancer"
+        },
+        "tags" : "Element,Infrastructure Node",
+        "technology" : "AWS ALB"
+      }, {
+        "description" : "Filters malicious traffic.",
+        "environment" : "Production",
+        "id" : "116",
+        "name" : "Web Application Firewall",
+        "properties" : {
+          "structurizr.dsl.identifier" : "productionWaf"
+        },
+        "tags" : "Element,Infrastructure Node",
+        "technology" : "AWS WAF"
+      } ],
+      "instances" : "1",
+      "name" : "Production Region",
+      "properties" : {
+        "structurizr.dsl.identifier" : "productionRegion"
+      },
+      "tags" : "Element,Deployment Node",
+      "technology" : "AWS eu-west-1"
+    } ],
+    "people" : [ {
+      "description" : "Buys products online.",
+      "id" : "1",
+      "name" : "Customer",
+      "properties" : {
+        "structurizr.dsl.identifier" : "customer"
+      },
+      "relationships" : [ {
+        "description" : "Browses and orders using",
+        "destinationId" : "5",
+        "id" : "31",
+        "sourceId" : "1",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Browses and orders using",
+        "destinationId" : "4",
+        "id" : "32",
+        "linkedRelationshipId" : "31",
+        "sourceId" : "1"
+      }, {
+        "description" : "Browses and orders using",
+        "destinationId" : "6",
+        "id" : "33",
+        "sourceId" : "1",
+        "tags" : "Relationship"
+      } ],
+      "tags" : "Element,Person"
+    } ],
+    "softwareSystems" : [ {
+      "description" : "Processes card payments.",
+      "documentation" : { },
+      "id" : "2",
+      "name" : "Payment Provider",
+      "properties" : {
+        "structurizr.dsl.identifier" : "psp"
+      },
+      "tags" : "Element,Software System,External"
+    }, {
+      "description" : "Delivers transactional email.",
+      "documentation" : { },
+      "id" : "3",
+      "name" : "Email Provider",
+      "properties" : {
+        "structurizr.dsl.identifier" : "emailProvider"
+      },
+      "tags" : "Element,Software System,External"
+    }, {
+      "containers" : [ {
+        "description" : "Storefront for browsers.",
+        "documentation" : { },
+        "id" : "5",
+        "name" : "Web Application",
+        "properties" : {
+          "structurizr.dsl.identifier" : "webApp"
+        },
+        "relationships" : [ {
+          "description" : "Calls",
+          "destinationId" : "7",
+          "id" : "34",
+          "sourceId" : "5",
+          "tags" : "Relationship",
+          "technology" : "HTTPS/JSON"
+        } ],
+        "tags" : "Element,Container,Browser",
+        "technology" : "React"
+      }, {
+        "description" : "Storefront for phones. Runs on customer devices, so it is not part of any server deployment.",
+        "documentation" : { },
+        "id" : "6",
+        "name" : "Mobile Storefront",
+        "properties" : {
+          "structurizr.dsl.identifier" : "mobileApp"
+        },
+        "relationships" : [ {
+          "description" : "Calls",
+          "destinationId" : "7",
+          "id" : "35",
+          "sourceId" : "6",
+          "tags" : "Relationship",
+          "technology" : "HTTPS/JSON"
+        } ],
+        "tags" : "Element,Container,Mobile",
+        "technology" : "Kotlin Multiplatform"
+      }, {
+        "description" : "Single entry point for all clients.",
+        "documentation" : { },
+        "id" : "7",
+        "name" : "API Gateway",
+        "properties" : {
+          "structurizr.dsl.identifier" : "apiGateway"
+        },
+        "relationships" : [ {
+          "description" : "Routes order requests to",
+          "destinationId" : "9",
+          "id" : "36",
+          "sourceId" : "7",
+          "tags" : "Relationship",
+          "technology" : "gRPC"
+        }, {
+          "description" : "Caches sessions in",
+          "destinationId" : "29",
+          "id" : "37",
+          "sourceId" : "7",
+          "tags" : "Relationship",
+          "technology" : "RESP"
+        }, {
+          "description" : "Routes catalog requests to",
+          "destinationId" : "8",
+          "id" : "39",
+          "sourceId" : "7",
+          "tags" : "Relationship",
+          "technology" : "gRPC"
+        }, {
+          "description" : "Routes payment requests to",
+          "destinationId" : "15",
+          "id" : "40",
+          "sourceId" : "7",
+          "tags" : "Relationship",
+          "technology" : "gRPC"
+        }, {
+          "description" : "Routes order requests to",
+          "destinationId" : "10",
+          "id" : "52",
+          "sourceId" : "7",
+          "tags" : "Relationship",
+          "technology" : "gRPC"
+        } ],
+        "tags" : "Element,Container",
+        "technology" : "Node.js / Express"
+      }, {
+        "description" : "Product data and search.",
+        "documentation" : { },
+        "id" : "8",
+        "name" : "Catalog Service",
+        "properties" : {
+          "structurizr.dsl.identifier" : "catalogService"
+        },
+        "relationships" : [ {
+          "description" : "Reads and writes",
+          "destinationId" : "26",
+          "id" : "41",
+          "sourceId" : "8",
+          "tags" : "Relationship",
+          "technology" : "MongoDB wire"
+        } ],
+        "tags" : "Element,Container",
+        "technology" : "Go"
+      }, {
+        "components" : [ {
+          "description" : "REST endpoints for orders.",
+          "documentation" : { },
+          "id" : "10",
+          "name" : "Order Controller",
+          "properties" : {
+            "structurizr.dsl.identifier" : "orderController"
+          },
+          "relationships" : [ {
+            "description" : "Uses",
+            "destinationId" : "11",
+            "id" : "53",
+            "sourceId" : "10",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : "Spring MVC"
+        }, {
+          "description" : "Order use cases.",
+          "documentation" : { },
+          "id" : "11",
+          "name" : "Order Facade",
+          "properties" : {
+            "structurizr.dsl.identifier" : "orderFacade"
+          },
+          "relationships" : [ {
+            "description" : "Uses",
+            "destinationId" : "12",
+            "id" : "54",
+            "sourceId" : "11",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Uses",
+            "destinationId" : "13",
+            "id" : "55",
+            "sourceId" : "11",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Uses",
+            "destinationId" : "14",
+            "id" : "56",
+            "sourceId" : "11",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Requests payment from",
+            "destinationId" : "16",
+            "id" : "61",
+            "sourceId" : "11",
+            "tags" : "Relationship",
+            "technology" : "gRPC"
+          }, {
+            "description" : "Requests payment from",
+            "destinationId" : "15",
+            "id" : "62",
+            "linkedRelationshipId" : "61",
+            "sourceId" : "11",
+            "technology" : "gRPC"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : "Spring Bean"
+        }, {
+          "description" : "Persists orders.",
+          "documentation" : { },
+          "id" : "12",
+          "name" : "Order Repository",
+          "properties" : {
+            "structurizr.dsl.identifier" : "orderRepository"
+          },
+          "relationships" : [ {
+            "description" : "Reads and writes",
+            "destinationId" : "27",
+            "id" : "57",
+            "sourceId" : "12",
+            "tags" : "Relationship",
+            "technology" : "JDBC"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : "Spring Data JPA"
+        }, {
+          "description" : "Fetches current prices.",
+          "documentation" : { },
+          "id" : "13",
+          "name" : "Pricing Client",
+          "properties" : {
+            "structurizr.dsl.identifier" : "pricingClient"
+          },
+          "relationships" : [ {
+            "description" : "Fetches prices from",
+            "destinationId" : "8",
+            "id" : "58",
+            "sourceId" : "13",
+            "tags" : "Relationship",
+            "technology" : "gRPC"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : "HTTP client"
+        }, {
+          "description" : "Publishes order events.",
+          "documentation" : { },
+          "id" : "14",
+          "name" : "Order Event Publisher",
+          "properties" : {
+            "structurizr.dsl.identifier" : "orderEventPublisher"
+          },
+          "relationships" : [ {
+            "description" : "Publishes order events to",
+            "destinationId" : "30",
+            "id" : "59",
+            "sourceId" : "14",
+            "tags" : "Relationship",
+            "technology" : "AMQP"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : "Spring AMQP"
+        } ],
+        "description" : "Order lifecycle.",
+        "documentation" : { },
+        "id" : "9",
+        "name" : "Order Service",
+        "properties" : {
+          "structurizr.dsl.identifier" : "orderService"
+        },
+        "relationships" : [ {
+          "description" : "Requests payment from",
+          "destinationId" : "15",
+          "id" : "38",
+          "sourceId" : "9",
+          "tags" : "Relationship",
+          "technology" : "gRPC"
+        }, {
+          "description" : "Reads and writes",
+          "destinationId" : "27",
+          "id" : "42",
+          "sourceId" : "9",
+          "tags" : "Relationship",
+          "technology" : "JDBC"
+        }, {
+          "description" : "Fetches prices from",
+          "destinationId" : "8",
+          "id" : "43",
+          "sourceId" : "9",
+          "tags" : "Relationship",
+          "technology" : "gRPC"
+        }, {
+          "description" : "Publishes order events to",
+          "destinationId" : "30",
+          "id" : "44",
+          "sourceId" : "9",
+          "tags" : "Relationship",
+          "technology" : "AMQP"
+        }, {
+          "description" : "Requests payment from",
+          "destinationId" : "16",
+          "id" : "63",
+          "linkedRelationshipId" : "61",
+          "sourceId" : "9",
+          "technology" : "gRPC"
+        } ],
+        "tags" : "Element,Container",
+        "technology" : "Java / Spring Boot"
+      }, {
+        "components" : [ {
+          "description" : "REST endpoints for payments.",
+          "documentation" : { },
+          "id" : "16",
+          "name" : "Payment Controller",
+          "properties" : {
+            "structurizr.dsl.identifier" : "paymentController"
+          },
+          "relationships" : [ {
+            "description" : "Uses",
+            "destinationId" : "17",
+            "id" : "60",
+            "sourceId" : "16",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : "Spring MVC"
+        }, {
+          "description" : "Payment use cases.",
+          "documentation" : { },
+          "id" : "17",
+          "name" : "Payment Processor",
+          "properties" : {
+            "structurizr.dsl.identifier" : "paymentProcessor"
+          },
+          "relationships" : [ {
+            "description" : "Screens payments with",
+            "destinationId" : "18",
+            "id" : "64",
+            "sourceId" : "17",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Uses",
+            "destinationId" : "19",
+            "id" : "65",
+            "sourceId" : "17",
+            "tags" : "Relationship"
+          }, {
+            "description" : "Uses",
+            "destinationId" : "20",
+            "id" : "66",
+            "sourceId" : "17",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : "Spring Bean"
+        }, {
+          "description" : "Rule-based fraud screening.",
+          "documentation" : { },
+          "id" : "18",
+          "name" : "Fraud Checker",
+          "properties" : {
+            "structurizr.dsl.identifier" : "fraudChecker"
+          },
+          "tags" : "Element,Component",
+          "technology" : "Spring Bean"
+        }, {
+          "description" : "Persists payments.",
+          "documentation" : { },
+          "id" : "19",
+          "name" : "Payment Repository",
+          "properties" : {
+            "structurizr.dsl.identifier" : "paymentRepository"
+          },
+          "relationships" : [ {
+            "description" : "Reads and writes",
+            "destinationId" : "28",
+            "id" : "67",
+            "sourceId" : "19",
+            "tags" : "Relationship",
+            "technology" : "JDBC"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : "Spring Data JPA"
+        }, {
+          "description" : "Talks to the payment provider.",
+          "documentation" : { },
+          "id" : "20",
+          "name" : "PSP Adapter",
+          "properties" : {
+            "structurizr.dsl.identifier" : "pspAdapter"
+          },
+          "relationships" : [ {
+            "description" : "Authorises and captures payments with",
+            "destinationId" : "2",
+            "id" : "68",
+            "sourceId" : "20",
+            "tags" : "Relationship",
+            "technology" : "HTTPS/JSON"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : "HTTP client"
+        }, {
+          "description" : "Reacts to order events.",
+          "documentation" : { },
+          "id" : "21",
+          "name" : "Payment Event Consumer",
+          "properties" : {
+            "structurizr.dsl.identifier" : "paymentEventConsumer"
+          },
+          "relationships" : [ {
+            "description" : "Uses",
+            "destinationId" : "17",
+            "id" : "71",
+            "sourceId" : "21",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : "Spring AMQP"
+        } ],
+        "description" : "Payment authorisation and capture.",
+        "documentation" : { },
+        "id" : "15",
+        "name" : "Payment Service",
+        "properties" : {
+          "structurizr.dsl.identifier" : "paymentService"
+        },
+        "relationships" : [ {
+          "description" : "Reads and writes",
+          "destinationId" : "28",
+          "id" : "45",
+          "sourceId" : "15",
+          "tags" : "Relationship",
+          "technology" : "JDBC"
+        }, {
+          "description" : "Authorises and captures payments with",
+          "destinationId" : "2",
+          "id" : "46",
+          "sourceId" : "15",
+          "tags" : "Relationship",
+          "technology" : "HTTPS/JSON"
+        }, {
+          "description" : "Publishes payment events to",
+          "destinationId" : "30",
+          "id" : "48",
+          "sourceId" : "15",
+          "tags" : "Relationship",
+          "technology" : "AMQP"
+        } ],
+        "tags" : "Element,Container",
+        "technology" : "Java / Spring Boot"
+      }, {
+        "components" : [ {
+          "description" : "Consumes domain events.",
+          "documentation" : { },
+          "id" : "23",
+          "name" : "Event Listener",
+          "properties" : {
+            "structurizr.dsl.identifier" : "eventListener"
+          },
+          "relationships" : [ {
+            "description" : "Uses",
+            "destinationId" : "24",
+            "id" : "74",
+            "sourceId" : "23",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : "amqplib"
+        }, {
+          "description" : "Renders message templates.",
+          "documentation" : { },
+          "id" : "24",
+          "name" : "Template Renderer",
+          "properties" : {
+            "structurizr.dsl.identifier" : "templateRenderer"
+          },
+          "relationships" : [ {
+            "description" : "Uses",
+            "destinationId" : "25",
+            "id" : "75",
+            "sourceId" : "24",
+            "tags" : "Relationship"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : "Handlebars"
+        }, {
+          "description" : "Hands messages to the email provider.",
+          "documentation" : { },
+          "id" : "25",
+          "name" : "Email Sender",
+          "properties" : {
+            "structurizr.dsl.identifier" : "emailSender"
+          },
+          "relationships" : [ {
+            "description" : "Sends email through",
+            "destinationId" : "3",
+            "id" : "76",
+            "sourceId" : "25",
+            "tags" : "Relationship",
+            "technology" : "HTTPS/JSON"
+          } ],
+          "tags" : "Element,Component",
+          "technology" : "HTTP client"
+        } ],
+        "description" : "Sends customer notifications.",
+        "documentation" : { },
+        "id" : "22",
+        "name" : "Notification Service",
+        "properties" : {
+          "structurizr.dsl.identifier" : "notificationService"
+        },
+        "relationships" : [ {
+          "description" : "Consumes events from",
+          "destinationId" : "30",
+          "id" : "49",
+          "sourceId" : "22",
+          "tags" : "Relationship",
+          "technology" : "AMQP"
+        }, {
+          "description" : "Sends email through",
+          "destinationId" : "3",
+          "id" : "50",
+          "sourceId" : "22",
+          "tags" : "Relationship",
+          "technology" : "HTTPS/JSON"
+        } ],
+        "tags" : "Element,Container",
+        "technology" : "Node.js"
+      }, {
+        "description" : "Products.",
+        "documentation" : { },
+        "id" : "26",
+        "name" : "Catalog Database",
+        "properties" : {
+          "structurizr.dsl.identifier" : "catalogDb"
+        },
+        "tags" : "Element,Container,Database",
+        "technology" : "MongoDB"
+      }, {
+        "description" : "Orders.",
+        "documentation" : { },
+        "id" : "27",
+        "name" : "Order Database",
+        "properties" : {
+          "structurizr.dsl.identifier" : "orderDb"
+        },
+        "tags" : "Element,Container,Database",
+        "technology" : "PostgreSQL"
+      }, {
+        "description" : "Payments.",
+        "documentation" : { },
+        "id" : "28",
+        "name" : "Payment Database",
+        "properties" : {
+          "structurizr.dsl.identifier" : "paymentDb"
+        },
+        "tags" : "Element,Container,Database",
+        "technology" : "PostgreSQL"
+      }, {
+        "description" : "Caches sessions and rate-limit counters.",
+        "documentation" : { },
+        "id" : "29",
+        "name" : "Session Cache",
+        "properties" : {
+          "structurizr.dsl.identifier" : "cache"
+        },
+        "tags" : "Element,Container,Cache",
+        "technology" : "Redis"
+      }, {
+        "description" : "Asynchronous domain events.",
+        "documentation" : { },
+        "id" : "30",
+        "name" : "Message Bus",
+        "properties" : {
+          "structurizr.dsl.identifier" : "messageBus"
+        },
+        "relationships" : [ {
+          "description" : "Delivers order events to",
+          "destinationId" : "21",
+          "id" : "69",
+          "sourceId" : "30",
+          "tags" : "Relationship",
+          "technology" : "AMQP"
+        }, {
+          "description" : "Delivers order events to",
+          "destinationId" : "15",
+          "id" : "70",
+          "linkedRelationshipId" : "69",
+          "sourceId" : "30",
+          "technology" : "AMQP"
+        }, {
+          "description" : "Delivers events to",
+          "destinationId" : "23",
+          "id" : "72",
+          "sourceId" : "30",
+          "tags" : "Relationship",
+          "technology" : "AMQP"
+        }, {
+          "description" : "Delivers events to",
+          "destinationId" : "22",
+          "id" : "73",
+          "linkedRelationshipId" : "72",
+          "sourceId" : "30",
+          "technology" : "AMQP"
+        } ],
+        "tags" : "Element,Container,Queue",
+        "technology" : "RabbitMQ"
+      } ],
+      "description" : "Online shop platform.",
+      "documentation" : { },
+      "id" : "4",
+      "name" : "ShopFlow",
+      "properties" : {
+        "structurizr.dsl.identifier" : "shop"
+      },
+      "relationships" : [ {
+        "description" : "Authorises and captures payments with",
+        "destinationId" : "2",
+        "id" : "47",
+        "linkedRelationshipId" : "46",
+        "sourceId" : "4",
+        "technology" : "HTTPS/JSON"
+      }, {
+        "description" : "Sends email through",
+        "destinationId" : "3",
+        "id" : "51",
+        "linkedRelationshipId" : "50",
+        "sourceId" : "4",
+        "technology" : "HTTPS/JSON"
+      } ],
+      "tags" : "Element,Software System"
+    } ]
+  },
+  "name" : "ShopFlow",
+  "properties" : {
+    "structurizr.inspection.error" : "48",
+    "structurizr.dsl" : "d29ya3NwYWNlICJTaG9wRmxvdyIgIlN5bnRoZXRpYyBlLWNvbW1lcmNlIHBsYXRmb3JtLiBEZW1vIG1vZGVsIGZvciB0aGUgQXJjaExlbnMgcHJvb2Ygb2YgY29uY2VwdC4iIHsKCiAgICBtb2RlbCB7CiAgICAgICAgY3VzdG9tZXIgPSBwZXJzb24gIkN1c3RvbWVyIiAiQnV5cyBwcm9kdWN0cyBvbmxpbmUuIgoKICAgICAgICBwc3AgPSBzb2Z0d2FyZVN5c3RlbSAiUGF5bWVudCBQcm92aWRlciIgIlByb2Nlc3NlcyBjYXJkIHBheW1lbnRzLiIgIkV4dGVybmFsIgogICAgICAgIGVtYWlsUHJvdmlkZXIgPSBzb2Z0d2FyZVN5c3RlbSAiRW1haWwgUHJvdmlkZXIiICJEZWxpdmVycyB0cmFuc2FjdGlvbmFsIGVtYWlsLiIgIkV4dGVybmFsIgoKICAgICAgICBzaG9wID0gc29mdHdhcmVTeXN0ZW0gIlNob3BGbG93IiAiT25saW5lIHNob3AgcGxhdGZvcm0uIiB7CiAgICAgICAgICAgIHdlYkFwcCA9IGNvbnRhaW5lciAiV2ViIEFwcGxpY2F0aW9uIiAiU3RvcmVmcm9udCBmb3IgYnJvd3NlcnMuIiAiUmVhY3QiICJCcm93c2VyIgogICAgICAgICAgICBtb2JpbGVBcHAgPSBjb250YWluZXIgIk1vYmlsZSBTdG9yZWZyb250IiAiU3RvcmVmcm9udCBmb3IgcGhvbmVzLiBSdW5zIG9uIGN1c3RvbWVyIGRldmljZXMsIHNvIGl0IGlzIG5vdCBwYXJ0IG9mIGFueSBzZXJ2ZXIgZGVwbG95bWVudC4iICJLb3RsaW4gTXVsdGlwbGF0Zm9ybSIgIk1vYmlsZSIKICAgICAgICAgICAgYXBpR2F0ZXdheSA9IGNvbnRhaW5lciAiQVBJIEdhdGV3YXkiICJTaW5nbGUgZW50cnkgcG9pbnQgZm9yIGFsbCBjbGllbnRzLiIgIk5vZGUuanMgLyBFeHByZXNzIgogICAgICAgICAgICBjYXRhbG9nU2VydmljZSA9IGNvbnRhaW5lciAiQ2F0YWxvZyBTZXJ2aWNlIiAiUHJvZHVjdCBkYXRhIGFuZCBzZWFyY2guIiAiR28iCiAgICAgICAgICAgIG9yZGVyU2VydmljZSA9IGNvbnRhaW5lciAiT3JkZXIgU2VydmljZSIgIk9yZGVyIGxpZmVjeWNsZS4iICJKYXZhIC8gU3ByaW5nIEJvb3QiIHsKICAgICAgICAgICAgICAgIG9yZGVyQ29udHJvbGxlciA9IGNvbXBvbmVudCAiT3JkZXIgQ29udHJvbGxlciIgIlJFU1QgZW5kcG9pbnRzIGZvciBvcmRlcnMuIiAiU3ByaW5nIE1WQyIKICAgICAgICAgICAgICAgIG9yZGVyRmFjYWRlID0gY29tcG9uZW50ICJPcmRlciBGYWNhZGUiICJPcmRlciB1c2UgY2FzZXMuIiAiU3ByaW5nIEJlYW4iCiAgICAgICAgICAgICAgICBvcmRlclJlcG9zaXRvcnkgPSBjb21wb25lbnQgIk9yZGVyIFJlcG9zaXRvcnkiICJQZXJzaXN0cyBvcmRlcnMuIiAiU3ByaW5nIERhdGEgSlBBIgogICAgICAgICAgICAgICAgcHJpY2luZ0NsaWVudCA9IGNvbXBvbmVudCAiUHJpY2luZyBDbGllbnQiICJGZXRjaGVzIGN1cnJlbnQgcHJpY2VzLiIgIkhUVFAgY2xpZW50IgogICAgICAgICAgICAgICAgb3JkZXJFdmVudFB1Ymxpc2hlciA9IGNvbXBvbmVudCAiT3JkZXIgRXZlbnQgUHVibGlzaGVyIiAiUHVibGlzaGVzIG9yZGVyIGV2ZW50cy4iICJTcHJpbmcgQU1RUCIKICAgICAgICAgICAgfQogICAgICAgICAgICBwYXltZW50U2VydmljZSA9IGNvbnRhaW5lciAiUGF5bWVudCBTZXJ2aWNlIiAiUGF5bWVudCBhdXRob3Jpc2F0aW9uIGFuZCBjYXB0dXJlLiIgIkphdmEgLyBTcHJpbmcgQm9vdCIgewogICAgICAgICAgICAgICAgcGF5bWVudENvbnRyb2xsZXIgPSBjb21wb25lbnQgIlBheW1lbnQgQ29udHJvbGxlciIgIlJFU1QgZW5kcG9pbnRzIGZvciBwYXltZW50cy4iICJTcHJpbmcgTVZDIgogICAgICAgICAgICAgICAgcGF5bWVudFByb2Nlc3NvciA9IGNvbXBvbmVudCAiUGF5bWVudCBQcm9jZXNzb3IiICJQYXltZW50IHVzZSBjYXNlcy4iICJTcHJpbmcgQmVhbiIKICAgICAgICAgICAgICAgIGZyYXVkQ2hlY2tlciA9IGNvbXBvbmVudCAiRnJhdWQgQ2hlY2tlciIgIlJ1bGUtYmFzZWQgZnJhdWQgc2NyZWVuaW5nLiIgIlNwcmluZyBCZWFuIgogICAgICAgICAgICAgICAgcGF5bWVudFJlcG9zaXRvcnkgPSBjb21wb25lbnQgIlBheW1lbnQgUmVwb3NpdG9yeSIgIlBlcnNpc3RzIHBheW1lbnRzLiIgIlNwcmluZyBEYXRhIEpQQSIKICAgICAgICAgICAgICAgIHBzcEFkYXB0ZXIgPSBjb21wb25lbnQgIlBTUCBBZGFwdGVyIiAiVGFsa3MgdG8gdGhlIHBheW1lbnQgcHJvdmlkZXIuIiAiSFRUUCBjbGllbnQiCiAgICAgICAgICAgICAgICBwYXltZW50RXZlbnRDb25zdW1lciA9IGNvbXBvbmVudCAiUGF5bWVudCBFdmVudCBDb25zdW1lciIgIlJlYWN0cyB0byBvcmRlciBldmVudHMuIiAiU3ByaW5nIEFNUVAiCiAgICAgICAgICAgIH0KICAgICAgICAgICAgbm90aWZpY2F0aW9uU2VydmljZSA9IGNvbnRhaW5lciAiTm90aWZpY2F0aW9uIFNlcnZpY2UiICJTZW5kcyBjdXN0b21lciBub3RpZmljYXRpb25zLiIgIk5vZGUuanMiIHsKICAgICAgICAgICAgICAgIGV2ZW50TGlzdGVuZXIgPSBjb21wb25lbnQgIkV2ZW50IExpc3RlbmVyIiAiQ29uc3VtZXMgZG9tYWluIGV2ZW50cy4iICJhbXFwbGliIgogICAgICAgICAgICAgICAgdGVtcGxhdGVSZW5kZXJlciA9IGNvbXBvbmVudCAiVGVtcGxhdGUgUmVuZGVyZXIiICJSZW5kZXJzIG1lc3NhZ2UgdGVtcGxhdGVzLiIgIkhhbmRsZWJhcnMiCiAgICAgICAgICAgICAgICBlbWFpbFNlbmRlciA9IGNvbXBvbmVudCAiRW1haWwgU2VuZGVyIiAiSGFuZHMgbWVzc2FnZXMgdG8gdGhlIGVtYWlsIHByb3ZpZGVyLiIgIkhUVFAgY2xpZW50IgogICAgICAgICAgICB9CiAgICAgICAgICAgIGNhdGFsb2dEYiA9IGNvbnRhaW5lciAiQ2F0YWxvZyBEYXRhYmFzZSIgIlByb2R1Y3RzLiIgIk1vbmdvREIiICJEYXRhYmFzZSIKICAgICAgICAgICAgb3JkZXJEYiA9IGNvbnRhaW5lciAiT3JkZXIgRGF0YWJhc2UiICJPcmRlcnMuIiAiUG9zdGdyZVNRTCIgIkRhdGFiYXNlIgogICAgICAgICAgICBwYXltZW50RGIgPSBjb250YWluZXIgIlBheW1lbnQgRGF0YWJhc2UiICJQYXltZW50cy4iICJQb3N0Z3JlU1FMIiAiRGF0YWJhc2UiCiAgICAgICAgICAgIGNhY2hlID0gY29udGFpbmVyICJTZXNzaW9uIENhY2hlIiAiQ2FjaGVzIHNlc3Npb25zIGFuZCByYXRlLWxpbWl0IGNvdW50ZXJzLiIgIlJlZGlzIiAiQ2FjaGUiCiAgICAgICAgICAgIG1lc3NhZ2VCdXMgPSBjb250YWluZXIgIk1lc3NhZ2UgQnVzIiAiQXN5bmNocm9ub3VzIGRvbWFpbiBldmVudHMuIiAiUmFiYml0TVEiICJRdWV1ZSIKICAgICAgICB9CgogICAgICAgICMgLS0tIGNvbnRhaW5lciBsZXZlbCByZWxhdGlvbnNoaXBzCiAgICAgICAgY3VzdG9tZXIgLT4gd2ViQXBwICJCcm93c2VzIGFuZCBvcmRlcnMgdXNpbmciCiAgICAgICAgY3VzdG9tZXIgLT4gbW9iaWxlQXBwICJCcm93c2VzIGFuZCBvcmRlcnMgdXNpbmciCiAgICAgICAgd2ViQXBwIC0+IGFwaUdhdGV3YXkgIkNhbGxzIiAiSFRUUFMvSlNPTiIKICAgICAgICBtb2JpbGVBcHAgLT4gYXBpR2F0ZXdheSAiQ2FsbHMiICJIVFRQUy9KU09OIgogICAgICAgIGFwaUdhdGV3YXkgLT4gb3JkZXJTZXJ2aWNlICJSb3V0ZXMgb3JkZXIgcmVxdWVzdHMgdG8iICJnUlBDIgogICAgICAgIGFwaUdhdGV3YXkgLT4gY2FjaGUgIkNhY2hlcyBzZXNzaW9ucyBpbiIgIlJFU1AiCiAgICAgICAgb3JkZXJTZXJ2aWNlIC0+IHBheW1lbnRTZXJ2aWNlICJSZXF1ZXN0cyBwYXltZW50IGZyb20iICJnUlBDIgogICAgICAgIGFwaUdhdGV3YXkgLT4gY2F0YWxvZ1NlcnZpY2UgIlJvdXRlcyBjYXRhbG9nIHJlcXVlc3RzIHRvIiAiZ1JQQyIKICAgICAgICBhcGlHYXRld2F5IC0+IHBheW1lbnRTZXJ2aWNlICJSb3V0ZXMgcGF5bWVudCByZXF1ZXN0cyB0byIgImdSUEMiCiAgICAgICAgY2F0YWxvZ1NlcnZpY2UgLT4gY2F0YWxvZ0RiICJSZWFkcyBhbmQgd3JpdGVzIiAiTW9uZ29EQiB3aXJlIgogICAgICAgIG9yZGVyU2VydmljZSAtPiBvcmRlckRiICJSZWFkcyBhbmQgd3JpdGVzIiAiSkRCQyIKICAgICAgICBvcmRlclNlcnZpY2UgLT4gY2F0YWxvZ1NlcnZpY2UgIkZldGNoZXMgcHJpY2VzIGZyb20iICJnUlBDIgogICAgICAgIG9yZGVyU2VydmljZSAtPiBtZXNzYWdlQnVzICJQdWJsaXNoZXMgb3JkZXIgZXZlbnRzIHRvIiAiQU1RUCIKICAgICAgICBwYXltZW50U2VydmljZSAtPiBwYXltZW50RGIgIlJlYWRzIGFuZCB3cml0ZXMiICJKREJDIgogICAgICAgIHBheW1lbnRTZXJ2aWNlIC0+IHBzcCAiQXV0aG9yaXNlcyBhbmQgY2FwdHVyZXMgcGF5bWVudHMgd2l0aCIgIkhUVFBTL0pTT04iCiAgICAgICAgcGF5bWVudFNlcnZpY2UgLT4gbWVzc2FnZUJ1cyAiUHVibGlzaGVzIHBheW1lbnQgZXZlbnRzIHRvIiAiQU1RUCIKICAgICAgICBub3RpZmljYXRpb25TZXJ2aWNlIC0+IG1lc3NhZ2VCdXMgIkNvbnN1bWVzIGV2ZW50cyBmcm9tIiAiQU1RUCIKICAgICAgICBub3RpZmljYXRpb25TZXJ2aWNlIC0+IGVtYWlsUHJvdmlkZXIgIlNlbmRzIGVtYWlsIHRocm91Z2giICJIVFRQUy9KU09OIgoKICAgICAgICAjIC0tLSBjb21wb25lbnQgbGV2ZWwgcmVsYXRpb25zaGlwcwogICAgICAgIGFwaUdhdGV3YXkgLT4gb3JkZXJDb250cm9sbGVyICJSb3V0ZXMgb3JkZXIgcmVxdWVzdHMgdG8iICJnUlBDIgogICAgICAgIG9yZGVyQ29udHJvbGxlciAtPiBvcmRlckZhY2FkZSAiVXNlcyIKICAgICAgICBvcmRlckZhY2FkZSAtPiBvcmRlclJlcG9zaXRvcnkgIlVzZXMiCiAgICAgICAgb3JkZXJGYWNhZGUgLT4gcHJpY2luZ0NsaWVudCAiVXNlcyIKICAgICAgICBvcmRlckZhY2FkZSAtPiBvcmRlckV2ZW50UHVibGlzaGVyICJVc2VzIgogICAgICAgIG9yZGVyUmVwb3NpdG9yeSAtPiBvcmRlckRiICJSZWFkcyBhbmQgd3JpdGVzIiAiSkRCQyIKICAgICAgICBwcmljaW5nQ2xpZW50IC0+IGNhdGFsb2dTZXJ2aWNlICJGZXRjaGVzIHByaWNlcyBmcm9tIiAiZ1JQQyIKICAgICAgICBvcmRlckV2ZW50UHVibGlzaGVyIC0+IG1lc3NhZ2VCdXMgIlB1Ymxpc2hlcyBvcmRlciBldmVudHMgdG8iICJBTVFQIgoKICAgICAgICBwYXltZW50Q29udHJvbGxlciAtPiBwYXltZW50UHJvY2Vzc29yICJVc2VzIgogICAgICAgIG9yZGVyRmFjYWRlIC0+IHBheW1lbnRDb250cm9sbGVyICJSZXF1ZXN0cyBwYXltZW50IGZyb20iICJnUlBDIgogICAgICAgIHBheW1lbnRQcm9jZXNzb3IgLT4gZnJhdWRDaGVja2VyICJTY3JlZW5zIHBheW1lbnRzIHdpdGgiCiAgICAgICAgcGF5bWVudFByb2Nlc3NvciAtPiBwYXltZW50UmVwb3NpdG9yeSAiVXNlcyIKICAgICAgICBwYXltZW50UHJvY2Vzc29yIC0+IHBzcEFkYXB0ZXIgIlVzZXMiCiAgICAgICAgcGF5bWVudFJlcG9zaXRvcnkgLT4gcGF5bWVudERiICJSZWFkcyBhbmQgd3JpdGVzIiAiSkRCQyIKICAgICAgICBwc3BBZGFwdGVyIC0+IHBzcCAiQXV0aG9yaXNlcyBhbmQgY2FwdHVyZXMgcGF5bWVudHMgd2l0aCIgIkhUVFBTL0pTT04iCiAgICAgICAgbWVzc2FnZUJ1cyAtPiBwYXltZW50RXZlbnRDb25zdW1lciAiRGVsaXZlcnMgb3JkZXIgZXZlbnRzIHRvIiAiQU1RUCIKICAgICAgICBwYXltZW50RXZlbnRDb25zdW1lciAtPiBwYXltZW50UHJvY2Vzc29yICJVc2VzIgoKICAgICAgICBtZXNzYWdlQnVzIC0+IGV2ZW50TGlzdGVuZXIgIkRlbGl2ZXJzIGV2ZW50cyB0byIgIkFNUVAiCiAgICAgICAgZXZlbnRMaXN0ZW5lciAtPiB0ZW1wbGF0ZVJlbmRlcmVyICJVc2VzIgogICAgICAgIHRlbXBsYXRlUmVuZGVyZXIgLT4gZW1haWxTZW5kZXIgIlVzZXMiCiAgICAgICAgZW1haWxTZW5kZXIgLT4gZW1haWxQcm92aWRlciAiU2VuZHMgZW1haWwgdGhyb3VnaCIgIkhUVFBTL0pTT04iCgogICAgICAgICMgLS0tIGRlcGxveW1lbnQgKGV2ZXJ5IG5vZGUgaGFzIGFuIGV4cGxpY2l0IGlkZW50aWZpZXI6IFN0cnVjdHVyaXpyIGFzc2lnbnMgcmFuZG9tIG9uZXMgb3RoZXJ3aXNlKQogICAgICAgIHN0YWdpbmcgPSBkZXBsb3ltZW50RW52aXJvbm1lbnQgIlN0YWdpbmciIHsKICAgICAgICAgICAgc3RhZ2luZ1JlZ2lvbiA9IGRlcGxveW1lbnROb2RlICJTdGFnaW5nIFJlZ2lvbiIgIiIgIkFXUyBldS13ZXN0LTEiIHsKICAgICAgICAgICAgICAgIHN0YWdpbmdMb2FkQmFsYW5jZXIgPSBpbmZyYXN0cnVjdHVyZU5vZGUgIkxvYWQgQmFsYW5jZXIiICJSb3V0ZXMgSFRUUFMgdHJhZmZpYy4iICJBV1MgQUxCIgogICAgICAgICAgICAgICAgc3RhZ2luZ0NsdXN0ZXIgPSBkZXBsb3ltZW50Tm9kZSAiU3RhZ2luZyBDbHVzdGVyIiAiIiAiS3ViZXJuZXRlcyIgewogICAgICAgICAgICAgICAgICAgIHN0YWdpbmdXZWJQb2QgPSBkZXBsb3ltZW50Tm9kZSAiV2ViIFBvZCIgIiIgIm5naW54IiAiIiAxIHsKICAgICAgICAgICAgICAgICAgICAgICAgc3RhZ2luZ1dlYkFwcCA9IGNvbnRhaW5lckluc3RhbmNlIHdlYkFwcAogICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgICAgICBzdGFnaW5nR2F0ZXdheVBvZCA9IGRlcGxveW1lbnROb2RlICJHYXRld2F5IFBvZCIgIiIgIkRvY2tlciIgIiIgMSB7CiAgICAgICAgICAgICAgICAgICAgICAgIHN0YWdpbmdBcGlHYXRld2F5ID0gY29udGFpbmVySW5zdGFuY2UgYXBpR2F0ZXdheQogICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgICAgICBzdGFnaW5nQ2F0YWxvZ1BvZCA9IGRlcGxveW1lbnROb2RlICJDYXRhbG9nIFBvZCIgIiIgIkRvY2tlciIgIiIgMSB7CiAgICAgICAgICAgICAgICAgICAgICAgIHN0YWdpbmdDYXRhbG9nU2VydmljZSA9IGNvbnRhaW5lckluc3RhbmNlIGNhdGFsb2dTZXJ2aWNlCiAgICAgICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgICAgIHN0YWdpbmdPcmRlclBvZCA9IGRlcGxveW1lbnROb2RlICJPcmRlciBQb2QiICIiICJEb2NrZXIiICIiIDEgewogICAgICAgICAgICAgICAgICAgICAgICBzdGFnaW5nT3JkZXJTZXJ2aWNlID0gY29udGFpbmVySW5zdGFuY2Ugb3JkZXJTZXJ2aWNlCiAgICAgICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgICAgIHN0YWdpbmdQYXltZW50UG9kID0gZGVwbG95bWVudE5vZGUgIlBheW1lbnQgUG9kIiAiIiAiRG9ja2VyIiAiIiAxIHsKICAgICAgICAgICAgICAgICAgICAgICAgc3RhZ2luZ1BheW1lbnRTZXJ2aWNlID0gY29udGFpbmVySW5zdGFuY2UgcGF5bWVudFNlcnZpY2UKICAgICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICAgICAgc3RhZ2luZ05vdGlmaWNhdGlvblBvZCA9IGRlcGxveW1lbnROb2RlICJOb3RpZmljYXRpb24gUG9kIiAiIiAiRG9ja2VyIiAiIiAxIHsKICAgICAgICAgICAgICAgICAgICAgICAgc3RhZ2luZ05vdGlmaWNhdGlvblNlcnZpY2UgPSBjb250YWluZXJJbnN0YW5jZSBub3RpZmljYXRpb25TZXJ2aWNlCiAgICAgICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgc3RhZ2luZ0RhdGFTdG9yZXMgPSBkZXBsb3ltZW50Tm9kZSAiU3RhZ2luZyBEYXRhIFN0b3JlcyIgIiIgIkRvY2tlciBDb21wb3NlIiB7CiAgICAgICAgICAgICAgICAgICAgc3RhZ2luZ01vbmdvID0gZGVwbG95bWVudE5vZGUgIk1vbmdvIiAiIiAiTW9uZ29EQiA3IiAiIiAxIHsKICAgICAgICAgICAgICAgICAgICAgICAgc3RhZ2luZ0NhdGFsb2dEYiA9IGNvbnRhaW5lckluc3RhbmNlIGNhdGFsb2dEYgogICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgICAgICBzdGFnaW5nUG9zdGdyZXMgPSBkZXBsb3ltZW50Tm9kZSAiUG9zdGdyZXMiICIiICJQb3N0Z3JlU1FMIDE2IiAiIiAxIHsKICAgICAgICAgICAgICAgICAgICAgICAgc3RhZ2luZ09yZGVyRGIgPSBjb250YWluZXJJbnN0YW5jZSBvcmRlckRiCiAgICAgICAgICAgICAgICAgICAgICAgIHN0YWdpbmdQYXltZW50RGIgPSBjb250YWluZXJJbnN0YW5jZSBwYXltZW50RGIKICAgICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICAgICAgc3RhZ2luZ0Jyb2tlciA9IGRlcGxveW1lbnROb2RlICJCcm9rZXIiICIiICJSYWJiaXRNUSAzIiAiIiAxIHsKICAgICAgICAgICAgICAgICAgICAgICAgc3RhZ2luZ01lc3NhZ2VCdXMgPSBjb250YWluZXJJbnN0YW5jZSBtZXNzYWdlQnVzCiAgICAgICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgfQogICAgICAgICAgICB9CiAgICAgICAgfQoKICAgICAgICBwcm9kdWN0aW9uID0gZGVwbG95bWVudEVudmlyb25tZW50ICJQcm9kdWN0aW9uIiB7CiAgICAgICAgICAgIHByb2R1Y3Rpb25SZWdpb24gPSBkZXBsb3ltZW50Tm9kZSAiUHJvZHVjdGlvbiBSZWdpb24iICIiICJBV1MgZXUtd2VzdC0xIiB7CiAgICAgICAgICAgICAgICBwcm9kdWN0aW9uTG9hZEJhbGFuY2VyID0gaW5mcmFzdHJ1Y3R1cmVOb2RlICJMb2FkIEJhbGFuY2VyIiAiUm91dGVzIEhUVFBTIHRyYWZmaWMuIiAiQVdTIEFMQiIKICAgICAgICAgICAgICAgIHByb2R1Y3Rpb25XYWYgPSBpbmZyYXN0cnVjdHVyZU5vZGUgIldlYiBBcHBsaWNhdGlvbiBGaXJld2FsbCIgIkZpbHRlcnMgbWFsaWNpb3VzIHRyYWZmaWMuIiAiQVdTIFdBRiIKICAgICAgICAgICAgICAgIHByb2R1Y3Rpb25DbHVzdGVyID0gZGVwbG95bWVudE5vZGUgIlByb2R1Y3Rpb24gQ2x1c3RlciIgIiIgIkt1YmVybmV0ZXMiIHsKICAgICAgICAgICAgICAgICAgICBwcm9kdWN0aW9uV2ViUG9kID0gZGVwbG95bWVudE5vZGUgIldlYiBQb2QiICIiICJuZ2lueCIgIiIgMyB7CiAgICAgICAgICAgICAgICAgICAgICAgIHByb2R1Y3Rpb25XZWJBcHAgPSBjb250YWluZXJJbnN0YW5jZSB3ZWJBcHAKICAgICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICAgICAgcHJvZHVjdGlvbkdhdGV3YXlQb2QgPSBkZXBsb3ltZW50Tm9kZSAiR2F0ZXdheSBQb2QiICIiICJEb2NrZXIiICIiIDQgewogICAgICAgICAgICAgICAgICAgICAgICBwcm9kdWN0aW9uQXBpR2F0ZXdheSA9IGNvbnRhaW5lckluc3RhbmNlIGFwaUdhdGV3YXkKICAgICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICAgICAgcHJvZHVjdGlvbkNhdGFsb2dQb2QgPSBkZXBsb3ltZW50Tm9kZSAiQ2F0YWxvZyBQb2QiICIiICJEb2NrZXIiICIiIDMgewogICAgICAgICAgICAgICAgICAgICAgICBwcm9kdWN0aW9uQ2F0YWxvZ1NlcnZpY2UgPSBjb250YWluZXJJbnN0YW5jZSBjYXRhbG9nU2VydmljZQogICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgICAgICBwcm9kdWN0aW9uT3JkZXJQb2QgPSBkZXBsb3ltZW50Tm9kZSAiT3JkZXIgUG9kIiAiIiAiRG9ja2VyIiAiIiAzIHsKICAgICAgICAgICAgICAgICAgICAgICAgcHJvZHVjdGlvbk9yZGVyU2VydmljZSA9IGNvbnRhaW5lckluc3RhbmNlIG9yZGVyU2VydmljZQogICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgICAgICBwcm9kdWN0aW9uUGF5bWVudFBvZCA9IGRlcGxveW1lbnROb2RlICJQYXltZW50IFBvZCIgIiIgIkRvY2tlciIgIiIgMyB7CiAgICAgICAgICAgICAgICAgICAgICAgIHByb2R1Y3Rpb25QYXltZW50U2VydmljZSA9IGNvbnRhaW5lckluc3RhbmNlIHBheW1lbnRTZXJ2aWNlCiAgICAgICAgICAgICAgICAgICAgfQogICAgICAgICAgICAgICAgICAgIHByb2R1Y3Rpb25Ob3RpZmljYXRpb25Qb2QgPSBkZXBsb3ltZW50Tm9kZSAiTm90aWZpY2F0aW9uIFBvZCIgIiIgIkRvY2tlciIgIiIgMiB7CiAgICAgICAgICAgICAgICAgICAgICAgIHByb2R1Y3Rpb25Ob3RpZmljYXRpb25TZXJ2aWNlID0gY29udGFpbmVySW5zdGFuY2Ugbm90aWZpY2F0aW9uU2VydmljZQogICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgIHByb2R1Y3Rpb25DYWNoZU5vZGUgPSBkZXBsb3ltZW50Tm9kZSAiQ2FjaGUgTm9kZSIgIiIgIkFXUyBFbGFzdGlDYWNoZSIgIiIgMiB7CiAgICAgICAgICAgICAgICAgICAgcHJvZHVjdGlvbkNhY2hlID0gY29udGFpbmVySW5zdGFuY2UgY2FjaGUKICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgIHByb2R1Y3Rpb25EYXRhU3RvcmVzID0gZGVwbG95bWVudE5vZGUgIlByb2R1Y3Rpb24gRGF0YSBTdG9yZXMiICIiICJNYW5hZ2VkIHNlcnZpY2VzIiB7CiAgICAgICAgICAgICAgICAgICAgcHJvZHVjdGlvbkF0bGFzID0gZGVwbG95bWVudE5vZGUgIkF0bGFzIiAiIiAiTW9uZ29EQiBBdGxhcyIgIiIgMyB7CiAgICAgICAgICAgICAgICAgICAgICAgIHByb2R1Y3Rpb25DYXRhbG9nRGIgPSBjb250YWluZXJJbnN0YW5jZSBjYXRhbG9nRGIKICAgICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICAgICAgcHJvZHVjdGlvblJkcyA9IGRlcGxveW1lbnROb2RlICJSRFMiICIiICJBbWF6b24gUkRTIFBvc3RncmVTUUwiICIiIDIgewogICAgICAgICAgICAgICAgICAgICAgICBwcm9kdWN0aW9uT3JkZXJEYiA9IGNvbnRhaW5lckluc3RhbmNlIG9yZGVyRGIKICAgICAgICAgICAgICAgICAgICAgICAgcHJvZHVjdGlvblBheW1lbnREYiA9IGNvbnRhaW5lckluc3RhbmNlIHBheW1lbnREYgogICAgICAgICAgICAgICAgICAgIH0KICAgICAgICAgICAgICAgICAgICBwcm9kdWN0aW9uQW1hem9uTXEgPSBkZXBsb3ltZW50Tm9kZSAiQW1hem9uIE1RIiAiIiAiUmFiYml0TVEiICIiIDIgewogICAgICAgICAgICAgICAgICAgICAgICBwcm9kdWN0aW9uTWVzc2FnZUJ1cyA9IGNvbnRhaW5lckluc3RhbmNlIG1lc3NhZ2VCdXMKICAgICAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgICAgICB9CiAgICAgICAgICAgIH0KICAgICAgICB9CiAgICB9CgogICAgdmlld3MgewogICAgICAgIHN5c3RlbUNvbnRleHQgc2hvcCAic3lzdGVtQ29udGV4dCIgIlN5c3RlbSBjb250ZXh0IG9mIFNob3BGbG93LiIgewogICAgICAgICAgICBpbmNsdWRlICoKICAgICAgICAgICAgYXV0b0xheW91dAogICAgICAgIH0KCiAgICAgICAgY29udGFpbmVyIHNob3AgImNvbnRhaW5lcnMiICJDb250YWluZXJzIG9mIFNob3BGbG93LiIgewogICAgICAgICAgICBpbmNsdWRlICoKICAgICAgICAgICAgYXV0b0xheW91dAogICAgICAgIH0KCiAgICAgICAgY29tcG9uZW50IG9yZGVyU2VydmljZSAib3JkZXJDb21wb25lbnRzIiAiQ29tcG9uZW50cyBvZiB0aGUgT3JkZXIgU2VydmljZS4iIHsKICAgICAgICAgICAgaW5jbHVkZSAqCiAgICAgICAgICAgIGF1dG9MYXlvdXQKICAgICAgICB9CgogICAgICAgIGNvbXBvbmVudCBwYXltZW50U2VydmljZSAicGF5bWVudENvbXBvbmVudHMiICJDb21wb25lbnRzIG9mIHRoZSBQYXltZW50IFNlcnZpY2UuIiB7CiAgICAgICAgICAgIGluY2x1ZGUgKgogICAgICAgICAgICBhdXRvTGF5b3V0CiAgICAgICAgfQoKICAgICAgICBkeW5hbWljIHNob3AgImNoZWNrb3V0RmxvdyIgIkN1c3RvbWVyIHBsYWNlcyBhbiBvcmRlciBvbiB0aGUgcGhvbmUgYW5kIHBheXMuIiB7CiAgICAgICAgICAgIGN1c3RvbWVyIC0+IG1vYmlsZUFwcCAiU3VibWl0cyBvcmRlciIKICAgICAgICAgICAgbW9iaWxlQXBwIC0+IGFwaUdhdGV3YXkgIlNlbmRzIG9yZGVyIHJlcXVlc3QiCiAgICAgICAgICAgIGFwaUdhdGV3YXkgLT4gb3JkZXJTZXJ2aWNlICJSb3V0ZXMgdG8gT3JkZXIgU2VydmljZSIKICAgICAgICAgICAgb3JkZXJTZXJ2aWNlIC0+IGNhdGFsb2dTZXJ2aWNlICJGZXRjaGVzIGN1cnJlbnQgcHJpY2VzIgogICAgICAgICAgICBvcmRlclNlcnZpY2UgLT4gcGF5bWVudFNlcnZpY2UgIlJlcXVlc3RzIHBheW1lbnQiCiAgICAgICAgICAgIHBheW1lbnRTZXJ2aWNlIC0+IHBzcCAiQXV0aG9yaXNlcyBhbmQgY2FwdHVyZXMgcGF5bWVudCIKICAgICAgICAgICAgb3JkZXJTZXJ2aWNlIC0+IG1lc3NhZ2VCdXMgIlB1Ymxpc2hlcyBPcmRlclBsYWNlZCIKICAgICAgICAgICAgbWVzc2FnZUJ1cyAtPiBub3RpZmljYXRpb25TZXJ2aWNlICJEZWxpdmVycyBPcmRlclBsYWNlZCIKICAgICAgICAgICAgYXV0b0xheW91dAogICAgICAgIH0KCiAgICAgICAgZGVwbG95bWVudCBzaG9wICJTdGFnaW5nIiAic3RhZ2luZ0RlcGxveW1lbnQiICJTdGFnaW5nIGRlcGxveW1lbnQuIiB7CiAgICAgICAgICAgIGluY2x1ZGUgKgogICAgICAgICAgICBhdXRvTGF5b3V0CiAgICAgICAgfQoKICAgICAgICBkZXBsb3ltZW50IHNob3AgIlByb2R1Y3Rpb24iICJwcm9kdWN0aW9uRGVwbG95bWVudCIgIlByb2R1Y3Rpb24gZGVwbG95bWVudC4iIHsKICAgICAgICAgICAgaW5jbHVkZSAqCiAgICAgICAgICAgIGF1dG9MYXlvdXQKICAgICAgICB9CiAgICB9Cn0=",
+    "structurizr.inspection.info" : "0",
+    "structurizr.inspection.ignore" : "0",
+    "structurizr.inspection.warning" : "0"
+  },
+  "views" : {
+    "componentViews" : [ {
+      "automaticLayout" : {
+        "edgeSeparation" : 50,
+        "nodeSeparation" : 50,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 100,
+        "vertices" : true
+      },
+      "containerId" : "9",
+      "description" : "Components of the Order Service.",
+      "elements" : [ {
+        "id" : "7",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "8",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "10",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "11",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "12",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "13",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "14",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "15",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "27",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "30",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "externalContainerBoundariesVisible" : false,
+      "key" : "orderComponents",
+      "name" : "Component View: ShopFlow - Order Service",
+      "order" : 3,
+      "relationships" : [ {
+        "id" : "39"
+      }, {
+        "id" : "40"
+      }, {
+        "id" : "48"
+      }, {
+        "id" : "52"
+      }, {
+        "id" : "53"
+      }, {
+        "id" : "54"
+      }, {
+        "id" : "55"
+      }, {
+        "id" : "56"
+      }, {
+        "id" : "57"
+      }, {
+        "id" : "58"
+      }, {
+        "id" : "59"
+      }, {
+        "id" : "62"
+      }, {
+        "id" : "70"
+      } ]
+    }, {
+      "automaticLayout" : {
+        "edgeSeparation" : 50,
+        "nodeSeparation" : 50,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 100,
+        "vertices" : true
+      },
+      "containerId" : "15",
+      "description" : "Components of the Payment Service.",
+      "elements" : [ {
+        "id" : "2",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "9",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "16",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "17",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "18",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "19",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "20",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "21",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "28",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "30",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "externalContainerBoundariesVisible" : false,
+      "key" : "paymentComponents",
+      "name" : "Component View: ShopFlow - Payment Service",
+      "order" : 4,
+      "relationships" : [ {
+        "id" : "44"
+      }, {
+        "id" : "60"
+      }, {
+        "id" : "63"
+      }, {
+        "id" : "64"
+      }, {
+        "id" : "65"
+      }, {
+        "id" : "66"
+      }, {
+        "id" : "67"
+      }, {
+        "id" : "68"
+      }, {
+        "id" : "69"
+      }, {
+        "id" : "71"
+      } ]
+    } ],
+    "configuration" : {
+      "styles" : { },
+      "terminology" : { }
+    },
+    "containerViews" : [ {
+      "automaticLayout" : {
+        "edgeSeparation" : 50,
+        "nodeSeparation" : 50,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 100,
+        "vertices" : true
+      },
+      "description" : "Containers of ShopFlow.",
+      "elements" : [ {
+        "id" : "1",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "2",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "3",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "5",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "6",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "7",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "8",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "9",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "15",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "22",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "26",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "27",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "28",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "29",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "30",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "externalSoftwareSystemBoundariesVisible" : false,
+      "key" : "containers",
+      "name" : "Container View: ShopFlow",
+      "order" : 2,
+      "relationships" : [ {
+        "id" : "31"
+      }, {
+        "id" : "33"
+      }, {
+        "id" : "34"
+      }, {
+        "id" : "35"
+      }, {
+        "id" : "36"
+      }, {
+        "id" : "37"
+      }, {
+        "id" : "38"
+      }, {
+        "id" : "39"
+      }, {
+        "id" : "40"
+      }, {
+        "id" : "41"
+      }, {
+        "id" : "42"
+      }, {
+        "id" : "43"
+      }, {
+        "id" : "44"
+      }, {
+        "id" : "45"
+      }, {
+        "id" : "46"
+      }, {
+        "id" : "48"
+      }, {
+        "id" : "49"
+      }, {
+        "id" : "50"
+      }, {
+        "id" : "70"
+      }, {
+        "id" : "73"
+      } ],
+      "softwareSystemId" : "4"
+    } ],
+    "deploymentViews" : [ {
+      "automaticLayout" : {
+        "edgeSeparation" : 50,
+        "nodeSeparation" : 50,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 100,
+        "vertices" : true
+      },
+      "description" : "Staging deployment.",
+      "elements" : [ {
+        "id" : "77",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "78",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "79",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "80",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "81",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "82",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "83",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "85",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "86",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "88",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "89",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "92",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "93",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "96",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "97",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "98",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "99",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "100",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "102",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "103",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "105",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "107",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "108",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "environment" : "Staging",
+      "key" : "stagingDeployment",
+      "name" : "Deployment View: ShopFlow - Staging",
+      "order" : 6,
+      "relationships" : [ {
+        "id" : "101"
+      }, {
+        "id" : "104"
+      }, {
+        "id" : "106"
+      }, {
+        "id" : "109"
+      }, {
+        "id" : "110"
+      }, {
+        "id" : "111"
+      }, {
+        "id" : "112"
+      }, {
+        "id" : "113"
+      }, {
+        "id" : "84"
+      }, {
+        "id" : "87"
+      }, {
+        "id" : "90"
+      }, {
+        "id" : "91"
+      }, {
+        "id" : "94"
+      }, {
+        "id" : "95"
+      } ],
+      "softwareSystemId" : "4"
+    }, {
+      "automaticLayout" : {
+        "edgeSeparation" : 50,
+        "nodeSeparation" : 50,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 100,
+        "vertices" : true
+      },
+      "description" : "Production deployment.",
+      "elements" : [ {
+        "id" : "114",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "115",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "116",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "117",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "118",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "119",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "120",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "121",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "123",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "124",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "126",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "127",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "130",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "131",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "134",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "135",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "136",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "137",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "139",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "140",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "141",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "143",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "144",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "146",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "148",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "149",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "environment" : "Production",
+      "key" : "productionDeployment",
+      "name" : "Deployment View: ShopFlow - Production",
+      "order" : 7,
+      "relationships" : [ {
+        "id" : "122"
+      }, {
+        "id" : "125"
+      }, {
+        "id" : "128"
+      }, {
+        "id" : "129"
+      }, {
+        "id" : "132"
+      }, {
+        "id" : "133"
+      }, {
+        "id" : "138"
+      }, {
+        "id" : "142"
+      }, {
+        "id" : "145"
+      }, {
+        "id" : "147"
+      }, {
+        "id" : "150"
+      }, {
+        "id" : "151"
+      }, {
+        "id" : "152"
+      }, {
+        "id" : "153"
+      }, {
+        "id" : "154"
+      } ],
+      "softwareSystemId" : "4"
+    } ],
+    "dynamicViews" : [ {
+      "automaticLayout" : {
+        "edgeSeparation" : 50,
+        "nodeSeparation" : 50,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 100,
+        "vertices" : true
+      },
+      "description" : "Customer places an order on the phone and pays.",
+      "elementId" : "4",
+      "elements" : [ {
+        "id" : "1",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "2",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "6",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "7",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "8",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "9",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "15",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "22",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "30",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "externalBoundariesVisible" : false,
+      "key" : "checkoutFlow",
+      "name" : "Dynamic View: ShopFlow",
+      "order" : 5,
+      "relationships" : [ {
+        "description" : "Submits order",
+        "id" : "33",
+        "order" : "1",
+        "response" : false
+      }, {
+        "description" : "Sends order request",
+        "id" : "35",
+        "order" : "2",
+        "response" : false
+      }, {
+        "description" : "Routes to Order Service",
+        "id" : "36",
+        "order" : "3",
+        "response" : false
+      }, {
+        "description" : "Fetches current prices",
+        "id" : "43",
+        "order" : "4",
+        "response" : false
+      }, {
+        "description" : "Requests payment",
+        "id" : "38",
+        "order" : "5",
+        "response" : false
+      }, {
+        "description" : "Authorises and captures payment",
+        "id" : "46",
+        "order" : "6",
+        "response" : false
+      }, {
+        "description" : "Publishes OrderPlaced",
+        "id" : "44",
+        "order" : "7",
+        "response" : false
+      }, {
+        "description" : "Delivers OrderPlaced",
+        "id" : "73",
+        "order" : "8",
+        "response" : false
+      } ]
+    } ],
+    "systemContextViews" : [ {
+      "automaticLayout" : {
+        "edgeSeparation" : 50,
+        "nodeSeparation" : 50,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 100,
+        "vertices" : true
+      },
+      "description" : "System context of ShopFlow.",
+      "elements" : [ {
+        "id" : "1",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "2",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "3",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "4",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "enterpriseBoundaryVisible" : true,
+      "key" : "systemContext",
+      "name" : "System Context View: ShopFlow",
+      "order" : 1,
+      "relationships" : [ {
+        "id" : "32"
+      }, {
+        "id" : "47"
+      }, {
+        "id" : "51"
+      } ],
+      "softwareSystemId" : "4"
+    } ]
+  }
+}

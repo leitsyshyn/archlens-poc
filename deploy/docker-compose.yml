@@ -27,3 +27,5 @@ services:
     image: postgres:16
   messageBus:
     image: rabbitmq:3-management
+  cache:
+    image: redis:7
